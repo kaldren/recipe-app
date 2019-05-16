@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4');
+
 const initRecipeForm = (container) => {
     // Default container is #main
     const rootEl = document.querySelector(container ? container : '#main');
@@ -43,6 +45,7 @@ const initRecipeForm = (container) => {
         });
 
         const recipe = {
+            'id': uuidv4(),
             'dishName': dishName.value.trim(),
             'ingredients': JSON.stringify(ingredientsList)
         };
@@ -56,6 +59,7 @@ const initRecipeForm = (container) => {
         allInputFields.forEach((el) => {
             el.value = '';
         });
+        loadAllRecipeNames();
     });
 
     formInputs.append(dishName);
