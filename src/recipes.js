@@ -73,12 +73,6 @@ const getAllRecipes = (storageName) => {
     return storage ? storage : [];
 }
 
-const getAllIngredients = () => {
-    const recipes = getAllRecipes();
-
-    return 
-}
-
 const loadAllRecipes = (container) => {
     const recipes = getAllRecipes();
 
@@ -123,6 +117,7 @@ const loadAllRecipeNames = (container) => {
         const recipesContainer = document.createElement('div');
 
         recipes.forEach(recipe => {
+            const recipeLink = document.createElement('a');
             const recipeDiv = document.createElement('div');
             const recipeName = document.createElement('p');
             const dishName = recipe.dishName;
@@ -131,7 +126,11 @@ const loadAllRecipeNames = (container) => {
     
             recipeName.textContent = dishName;
             recipeName.classList.add('recipe-name');
-            recipeDiv.append(recipeName);
+
+            recipeLink.href = 'https://google.com';
+            recipeLink.append(recipeName);
+
+            recipeDiv.append(recipeLink);
 
             recipesContainer.append(recipeDiv);
         })
