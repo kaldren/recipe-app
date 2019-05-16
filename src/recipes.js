@@ -121,7 +121,6 @@ const loadAllRecipeNames = (container) => {
         const recipesContainer = document.createElement('div');
 
         recipes.forEach(recipe => {
-            const recipeLink = document.createElement('a');
             const recipeDiv = document.createElement('div');
             const recipeName = document.createElement('p');
             const dishName = recipe.dishName;
@@ -130,11 +129,9 @@ const loadAllRecipeNames = (container) => {
     
             recipeName.textContent = dishName;
             recipeName.classList.add('recipe-name');
+            recipeName.classList.add(`js-recipe-${recipe.id}`);
 
-            recipeLink.href = 'https://google.com';
-            recipeLink.append(recipeName);
-
-            recipeDiv.append(recipeLink);
+            recipeDiv.append(recipeName);
 
             recipesContainer.append(recipeDiv);
         })
