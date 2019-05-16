@@ -1,0 +1,9 @@
+import {initRecipeForm, loadAllRecipes} from './recipes';
+
+initRecipeForm();
+
+const btnLoadAllRecipes = document.querySelector('.btn-all-recipes');
+
+btnLoadAllRecipes.addEventListener('click', () => {
+    loadAllRecipes();
+});

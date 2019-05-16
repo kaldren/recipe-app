@@ -1,0 +1,92 @@
+body {
+    margin: 40px;
+}
+
+/*#region  General */
+.display-block {display: block;}
+.whitespace {margin: 0 20px;}
+/*#endregion  General */
+
+/* #region Areas */
+.header {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: header;
+}
+.sidebar {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 3;
+    -ms-grid-column: 1;
+    grid-area: sidebar;
+}
+#main {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: main;
+}
+.footer {
+    -ms-grid-row: 5;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: footer;
+}
+/* #endregion Areas */
+
+/*#region Base Structure */
+#root {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px;
+    -ms-grid-columns: 20% 10px 80%;
+    grid-template-columns: 20% 80%;
+    -ms-grid-rows: auto 10px auto 10px auto;
+        grid-template-areas:
+    ". header header"
+    "sidebar main main"
+    "sidebar footer footer";
+    background-color: #fff;
+    color: #444;
+}
+
+.box {
+    background-color: #2ecc71;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 150%;
+}
+
+  .header,
+  .footer {
+    background-color: #bdc3c7;
+  }
+  /*#endregion Base Structure */
+
+/*#region UI */
+.button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+}
+
+.input {
+    height: 25px;
+    padding: 6px;
+    margin: 10px 0px;
+    width: 300px;
+    max-width: 100%;
+    border-radius: 2px;
+    border: none;
+    font-size: 1.2rem;
+}
+/*#endregion UI */

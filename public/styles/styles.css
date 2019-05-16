@@ -1,0 +1,117 @@
+body {
+    margin: 40px;
+}
+
+/*#region  General */
+.display-block {display: block;}
+.whitespace {
+    display: inline-block;
+    margin: 0 20px;
+}
+p {
+    margin: 10px 0px;
+}
+/*#endregion  General */
+
+/* #region Areas */
+.header {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: header;
+}
+#sidebar {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 3;
+    -ms-grid-column: 1;
+    grid-area: sidebar;
+}
+#main {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: main;
+}
+.footer {
+    -ms-grid-row: 5;
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: footer;
+}
+/* #endregion Areas */
+
+/*#region Base Structure */
+#root {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px;
+    -ms-grid-columns: 20% 10px 80%;
+    grid-template-columns: 20% 80%;
+    -ms-grid-rows: auto 10px auto 10px auto;
+        grid-template-areas:
+    ". header header"
+    "sidebar main main"
+    "footer footer footer";
+    background-color: #fff;
+    color: #444;
+}
+
+.box {
+    background-color: #2ecc71;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 150%;
+}
+
+  .header {background: #fff;}
+
+  .footer {
+    background-color: #2ecc71;
+  }
+
+  .recipe {
+      background: #f1c40f;
+      padding:10px;
+      margin: 10px auto;
+  }
+
+  .recipe-name {
+      background: #3498db;
+      padding: 10px;
+  }
+  /*#endregion Base Structure */
+
+/*#region UI */
+.button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    font-size: 20px;
+}
+.button:hover {
+    webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
+}
+
+.input {
+    height:35px;
+    width: 300px;
+    max-width: 100%;
+    padding: 0 12px;
+    border-radius: 2px;
+    border: none;
+    margin: 10px 0px;
+}
+.input:focus {
+    outline: none;
+}
+/*#endregion UI */

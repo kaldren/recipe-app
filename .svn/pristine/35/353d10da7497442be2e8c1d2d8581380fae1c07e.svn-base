@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./styles/styles.css">
+    </head>
+    <body>
+        <div id="root">
+            <div class="box header">
+                <a class="button btn-new-recipe" href="javascript:void(0)">New Recipe</a>
+                <a class="button btn-all-recipes" href="javascript:void(0)">All Recipes</a>
+            </div>
+            <div class="box sidebar"></div>
+            <div id="main" class="box"></div>
+            <div class="box footer"></div>
+        </div>
+        <script src="./scripts/main.js"></script>
+    </body>
+</html>
