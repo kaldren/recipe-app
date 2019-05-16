@@ -77,14 +77,13 @@ const getAllRecipes = (storageName) => {
     return storage ? storage : [];
 }
 
-const loadAllRecipes = (container) => {
+// By default show all recipes, else provide a recipeId to show individual recipe
+const loadAllRecipes = (container, recipeId) => {
     const recipes = getAllRecipes();
 
     // Default container is #main
     const rootEl = document.querySelector(container ? container : '#main');
     rootEl.innerHTML = '';
-
-    const recipesList = [];
 
     const recipesContainer = document.createElement('div');
 
@@ -114,29 +113,34 @@ const loadAllRecipes = (container) => {
 const loadAllRecipeNames = (container) => {
     const recipes = getAllRecipes();
 
-        // Default container is #sidebar
-        const rootEl = document.querySelector(container ? container : '#sidebar');
-        rootEl.innerHTML = '';
+    // Default container is #sidebar
+    const rootEl = document.querySelector(container ? container : '#sidebar');
+    rootEl.innerHTML = '';
 
-        const recipesContainer = document.createElement('div');
+    const recipesContainer = document.createElement('div');
 
-        recipes.forEach(recipe => {
-            const recipeDiv = document.createElement('div');
-            const recipeName = document.createElement('p');
-            const dishName = recipe.dishName;
-    
-            recipeDiv.classList.add('recipe');
-    
-            recipeName.textContent = dishName;
-            recipeName.classList.add('recipe-name');
-            recipeName.classList.add(`js-recipe-${recipe.id}`);
+    recipes.forEach(recipe => {
+        const recipeDiv = document.createElement('div');
+        const recipeName = document.createElement('p');
+        const dishName = recipe.dishName;
 
-            recipeDiv.append(recipeName);
+        recipeDiv.classList.add('recipe');
 
-            recipesContainer.append(recipeDiv);
-        })
-    
-        rootEl.append(recipesContainer);
+        recipeName.textContent = dishName;
+        recipeName.classList.add('recipe-name');
+        recipeName.dataset.id = `js-recipe-${recipe.id}`;
+
+        recipeName.addEventListener('click', e => {
+            const recipeId = e.target.dataset.id;
+            loadAllRecipes(undefined,recipeId);
+        });
+
+        recipeDiv.append(recipeName);
+
+        recipesContainer.append(recipeDiv);
+    })
+
+    rootEl.append(recipesContainer);
 }
 
 export {initRecipeForm, loadAllRecipes, loadAllRecipeNames}
