@@ -87,11 +87,16 @@ const loadAllRecipes = (container, recipeId) => {
 
     const recipesContainer = document.createElement('div');
 
-    recipes.forEach(recipe => {
+    // Individual recipe
+    if (recipeId) {
+        const recipe = recipes.filter(el => {
+            return el.id === recipeId;
+        })
+
         const recipeDiv = document.createElement('div');
         const recipeName = document.createElement('p');
-        const ingredientsArr = JSON.parse(recipe.ingredients);
-        const dishName = recipe.dishName;
+        const ingredientsArr = JSON.parse(recipe[0].ingredients);
+        const dishName = recipe[0].dishName;
 
         recipeDiv.classList.add('recipe');
 
@@ -105,9 +110,33 @@ const loadAllRecipes = (container, recipeId) => {
             recipeDiv.append(ingredientEl);
         })
         recipesContainer.append(recipeDiv);
-    })
 
-    rootEl.append(recipesContainer);
+        rootEl.append(recipesContainer);
+    }
+    // Multiple recipes
+    else {
+        recipes.forEach(recipe => {
+            const recipeDiv = document.createElement('div');
+            const recipeName = document.createElement('p');
+            const ingredientsArr = JSON.parse(recipe.ingredients);
+            const dishName = recipe.dishName;
+    
+            recipeDiv.classList.add('recipe');
+    
+            recipeName.textContent = dishName;
+            recipeName.classList.add('recipe-name');
+            recipeDiv.append(recipeName);
+    
+            ingredientsArr.forEach(ingredient => {
+                const ingredientEl = document.createElement('p');
+                ingredientEl.textContent = ingredient;
+                recipeDiv.append(ingredientEl);
+            })
+            recipesContainer.append(recipeDiv);
+        })
+        rootEl.append(recipesContainer);
+    }
+
 }
 
 const loadAllRecipeNames = (container) => {
@@ -128,7 +157,7 @@ const loadAllRecipeNames = (container) => {
 
         recipeName.textContent = dishName;
         recipeName.classList.add('recipe-name');
-        recipeName.dataset.id = `js-recipe-${recipe.id}`;
+        recipeName.dataset.id = `${recipe.id}`;
 
         recipeName.addEventListener('click', e => {
             const recipeId = e.target.dataset.id;
