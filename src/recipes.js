@@ -126,11 +126,25 @@ const loadAllRecipes = (container, recipeId) => {
         recipeRemoveBtn.textContent = 'Remove';
         recipeRemoveBtn.classList.add('btn');
         recipeRemoveBtn.classList.add('btn-remove');
+        recipeRemoveBtn.dataset.id = `${recipeId}`;
+
+        recipeRemoveBtn.addEventListener('click', e => {
+            const recipeId = e.target.dataset.id;
+
+            if (recipeId) {
+                let recipesList = getAllRecipes();
+                recipesList = recipesList.filter(recipe => {
+                    return recipe.id !== recipeId;
+                })
+                localStorage.setItem('recipes', JSON.stringify(recipesList));
+                loadAllRecipes();
+                loadAllRecipeNames();
+            }
+        });
         
         recipeEditBtn.textContent = 'Edit';
         recipeEditBtn.classList.add('btn');
         recipeEditBtn.classList.add('btn-edit');
-        
         
         btnOptions.classList.add('options');
         btnOptions.append(recipeEditBtn);
