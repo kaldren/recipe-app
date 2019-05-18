@@ -90,7 +90,7 @@ h2 {
   /*#endregion Base Structure */
 
 /*#region UI */
-.button {
+.btn {
     background-color: #3498db;
     color: #fff;
     padding: 5px 10px;
@@ -103,8 +103,9 @@ h2 {
     transition: background-color .2s ease-out;
     cursor: pointer;
     font-size: 20px;
+    margin: 10px;
 }
-.button:hover {
+.btn:hover {
     webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
 }
@@ -120,5 +121,10 @@ h2 {
 }
 .input:focus {
     outline: none;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: auto auto;
 }
 /*#endregion UI */

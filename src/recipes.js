@@ -17,7 +17,7 @@ const initRecipeForm = (container) => {
     dishName.classList.add('js-dishname');
     
     btnAddIngredient.textContent = 'Add Ingredient';
-    btnAddIngredient.classList.add('button');
+    btnAddIngredient.classList.add('btn');
     btnAddIngredient.classList.add('whitespace');
     
     btnAddIngredient.addEventListener('click', () => {
@@ -31,7 +31,7 @@ const initRecipeForm = (container) => {
     });
     
     btnCreateRecipe.textContent = 'Create';
-    btnCreateRecipe.classList.add('button');
+    btnCreateRecipe.classList.add('btn');
     
     btnCreateRecipe.addEventListener('click', () => {
         const ingredientsList = [];
@@ -118,6 +118,11 @@ const loadAllRecipes = (container, recipeId) => {
             ingredientEl.textContent = ingredient;
             recipeDiv.append(ingredientEl);
         })
+        recipeRemoveBtn.textContent = 'Remove';
+        recipeEditBtn.textContent = 'Edit';
+    
+        recipesContainer.append(recipeRemoveBtn);
+        recipesContainer.append(recipeEditBtn);
         recipesContainer.append(recipeDiv);
     }
     // Multiple recipes
@@ -140,8 +145,28 @@ const loadAllRecipes = (container, recipeId) => {
                 recipeDiv.append(ingredientEl);
             })
             recipesContainer.append(recipeDiv);
+
+            const btnOptions = document.createElement('div');
+            const recipeRemoveBtn = document.createElement('button');
+            const recipeEditBtn = document.createElement('button');
+
+            recipeRemoveBtn.textContent = 'Remove';
+            recipeRemoveBtn.classList.add('btn');
+            recipeRemoveBtn.classList.add('btn-remove');
+
+            recipeEditBtn.textContent = 'Edit';
+            recipeEditBtn.classList.add('btn');
+            recipeEditBtn.classList.add('btn-edit');
+
+
+            btnOptions.classList.add('options');
+            btnOptions.append(recipeEditBtn);
+            btnOptions.append(recipeRemoveBtn);
+        
+            recipesContainer.append(btnOptions);
         })
     }
+
     rootEl.append(recipesContainer);
 }
 
