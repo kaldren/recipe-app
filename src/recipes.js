@@ -87,6 +87,15 @@ const loadAllRecipes = (container, recipeId) => {
 
     const recipesContainer = document.createElement('div');
 
+    if (recipes.length === 0) {
+        const noRecipesTxt = document.createElement('h2');
+        noRecipesTxt.textContent = 'No recipies found.';
+
+        recipesContainer.append(noRecipesTxt);
+        rootEl.append(recipesContainer);
+        return;
+    }
+
     // Individual recipe
     if (recipeId) {
         const recipe = recipes.filter(el => {
@@ -110,8 +119,6 @@ const loadAllRecipes = (container, recipeId) => {
             recipeDiv.append(ingredientEl);
         })
         recipesContainer.append(recipeDiv);
-
-        rootEl.append(recipesContainer);
     }
     // Multiple recipes
     else {
@@ -134,9 +141,8 @@ const loadAllRecipes = (container, recipeId) => {
             })
             recipesContainer.append(recipeDiv);
         })
-        rootEl.append(recipesContainer);
     }
-
+    rootEl.append(recipesContainer);
 }
 
 const loadAllRecipeNames = (container) => {
