@@ -118,12 +118,26 @@ const loadAllRecipes = (container, recipeId) => {
             ingredientEl.textContent = ingredient;
             recipeDiv.append(ingredientEl);
         })
-        recipeRemoveBtn.textContent = 'Remove';
-        recipeEditBtn.textContent = 'Edit';
-    
-        recipesContainer.append(recipeRemoveBtn);
-        recipesContainer.append(recipeEditBtn);
         recipesContainer.append(recipeDiv);
+
+        const btnOptions = document.createElement('div');
+        const recipeRemoveBtn = document.createElement('button');
+        const recipeEditBtn = document.createElement('button');
+
+        recipeRemoveBtn.textContent = 'Remove';
+        recipeRemoveBtn.classList.add('btn');
+        recipeRemoveBtn.classList.add('btn-remove');
+
+        recipeEditBtn.textContent = 'Edit';
+        recipeEditBtn.classList.add('btn');
+        recipeEditBtn.classList.add('btn-edit');
+
+
+        btnOptions.classList.add('options');
+        btnOptions.append(recipeEditBtn);
+        btnOptions.append(recipeRemoveBtn);
+    
+        recipesContainer.append(btnOptions);
     }
     // Multiple recipes
     else {

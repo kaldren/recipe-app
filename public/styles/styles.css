@@ -90,6 +90,8 @@ h2 {
   /*#endregion Base Structure */
 
 /*#region UI */
+
+/*#region Buttons */
 .btn {
     background-color: #3498db;
     color: #fff;
@@ -109,6 +111,13 @@ h2 {
     webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
 }
+.btn-edit {
+    background: #3498db;
+}
+.btn-remove {
+    background: #e74c3c;
+}
+/*#endregion Buttons */
 
 .input {
     height:45px;
@@ -122,7 +131,6 @@ h2 {
 .input:focus {
     outline: none;
 }
-
 .options {
     display: grid;
     grid-template-columns: auto auto;
