@@ -141,7 +141,13 @@ const loadAllRecipes = (recipeId) => {
         recipeEditBtn.textContent = 'Edit';
         recipeEditBtn.classList.add('btn');
         recipeEditBtn.classList.add('btn-edit');
-        recipeEditBtn.dataset.id = `${recipe.id}`;
+        recipeEditBtn.dataset.id = `${recipeId}`;
+
+        recipeEditBtn.addEventListener('click', e => {
+            // recipeDiv.contentEditable = true;
+            recipeDiv.innerHTML = '';
+            editRecipeForm(recipeId);
+        })
         
         btnOptions.classList.add('options');
         btnOptions.append(recipeEditBtn);
@@ -263,6 +269,72 @@ const getRecipeById = (recipes, id) => {
 
 const addRecipe = (storageName, recipes) => {
     localStorage.setItem(storageName, JSON.stringify(recipes));
+}
+
+const editRecipeForm = (recipeId) => {
+    const recipes = getAllRecipes();
+
+    // Default container is #main
+    const rootEl = getRootContainer(undefined, true);
+
+    const recipesContainer = document.createElement('div');
+
+    const recipe = getRecipeById(recipes, recipeId);
+
+    const recipeDiv = document.createElement('div');
+    const recipeName = document.createElement('input');
+    const ingredientsArr = JSON.parse(recipe[0].ingredients);
+    const dishName = recipe[0].dishName;
+
+    recipeDiv.classList.add('recipe');
+
+    recipeName.value = dishName;
+    recipeName.classList.add('input');
+    recipeDiv.append(recipeName);
+
+    ingredientsArr.forEach(ingredient => {
+        const ingredientEl = document.createElement('input');
+        ingredientEl.classList.add('input');
+        ingredientEl.value = ingredient;
+        recipeDiv.append(ingredientEl);
+    })
+    
+    const btnOptions = document.createElement('div');
+    const btnAddIngredient = document.createElement('button');
+    const recipeEditBtn = document.createElement('button');
+
+    btnAddIngredient.textContent = 'Add Ingredient';
+    btnAddIngredient.classList.add('btn');
+    btnAddIngredient.classList.add('whitespace');
+    
+    btnAddIngredient.addEventListener('click', () => {
+        const ingredient = document.createElement('input');
+        ingredient.placeholder = 'Ingredient';
+        ingredient.classList.add('display-block');
+        ingredient.classList.add('input');
+        ingredient.classList.add('js-ingredient');
+        
+        recipeDiv.append(ingredient);
+    });
+    
+    recipeEditBtn.textContent = 'Save';
+    recipeEditBtn.classList.add('btn');
+    recipeEditBtn.classList.add('btn-save');
+    recipeEditBtn.dataset.id = `${recipeId}`;
+
+    recipeEditBtn.addEventListener('click', e => {
+        // recipeDiv.contentEditable = true;
+        recipeEditBtn.textContent = 'Save';
+        recipeEditBtn.classList.add('btn-save');
+    })
+    
+    btnOptions.classList.add('options');
+    btnOptions.append(recipeEditBtn);
+    btnOptions.append(btnAddIngredient);
+    
+    recipesContainer.append(recipeDiv);
+    recipesContainer.append(btnOptions);
+    rootEl.append(recipesContainer);
 }
 
 export {initRecipeForm, loadAllRecipes, loadAllRecipeNames}

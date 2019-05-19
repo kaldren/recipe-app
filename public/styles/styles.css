@@ -117,6 +117,9 @@ h2 {
 .btn-remove {
     background: #e74c3c;
 }
+.btn-save {
+    background: rgb(0, 230, 64);
+}
 /*#endregion Buttons */
 
 .input {
