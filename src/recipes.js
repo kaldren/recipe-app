@@ -1,9 +1,8 @@
 const uuidv4 = require('uuid/v4');
 
-const initRecipeForm = (container) => {
+const initRecipeForm = () => {
     // Default container is #main
-    const rootEl = getRootContainer();
-    rootEl.innerHTML = '';
+    const rootEl = getRootContainer(undefined, true);
 
     const recipeForm = document.createElement('div');
     const formInputs = document.createElement('div');
@@ -59,6 +58,7 @@ const initRecipeForm = (container) => {
         allInputFields.forEach((el) => {
             el.value = '';
         });
+
         loadAllRecipeNames();
     });
 
@@ -77,13 +77,12 @@ const getAllRecipes = (storageName) => {
     return storage ? storage : [];
 }
 
-// By default show all recipes, else provide a recipeId to show individual recipe
+// By default show all recipes, else provide a recipe id to show individual recipe
 const loadAllRecipes = (recipeId) => {
     const recipes = getAllRecipes();
 
     // Default container is #main
-    const rootEl = getRootContainer();
-    rootEl.innerHTML = '';
+    const rootEl = getRootContainer(undefined, true);
 
     const recipesContainer = document.createElement('div');
 
@@ -142,6 +141,7 @@ const loadAllRecipes = (recipeId) => {
         recipeEditBtn.textContent = 'Edit';
         recipeEditBtn.classList.add('btn');
         recipeEditBtn.classList.add('btn-edit');
+        recipeEditBtn.dataset.id = `${recipe.id}`;
         
         btnOptions.classList.add('options');
         btnOptions.append(recipeEditBtn);
@@ -241,8 +241,12 @@ const loadAllRecipeNames = (container) => {
     rootEl.append(recipesContainer);
 }
 
-const getRootContainer = (container) => {
-    return document.querySelector(container ? container : '#main');
+const getRootContainer = (container, removeContent) => {
+    const containerEl = document.querySelector(container ? container : '#main');
+
+    removeContent ? containerEl.innerHTML = '' : '';
+
+    return containerEl;
 }
 
 const removeRecipeById = (recipes, id) => {
