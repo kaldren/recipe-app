@@ -204,6 +204,12 @@ const loadAllRecipes = (recipeId) => {
             recipeEditBtn.classList.add('btn-edit');
             recipeEditBtn.dataset.id = `${recipe.id}`;
 
+            recipeEditBtn.addEventListener('click', e => {
+                // recipeDiv.contentEditable = true;
+                recipeDiv.innerHTML = '';
+                editRecipeForm(recipe.id);
+            })
+
             btnOptions.classList.add('options');
             btnOptions.append(recipeEditBtn);
             btnOptions.append(recipeRemoveBtn);
