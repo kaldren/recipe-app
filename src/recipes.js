@@ -294,9 +294,16 @@ const editRecipeForm = (recipeId) => {
 
     ingredientsArr.forEach(ingredient => {
         const ingredientEl = document.createElement('input');
+        const removeIngredientBtn = document.createElement('button');
+
+        removeIngredientBtn.textContent = 'Remove'
+        removeIngredientBtn.classList.add('btn');
+        removeIngredientBtn.classList.add('btn-remove');
+
         ingredientEl.classList.add('input');
         ingredientEl.value = ingredient;
         recipeDiv.append(ingredientEl);
+        recipeDiv.append(removeIngredientBtn    );
     })
     
     const btnOptions = document.createElement('div');
