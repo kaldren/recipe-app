@@ -293,6 +293,7 @@ const editRecipeForm = (recipeId) => {
     recipeDiv.append(recipeName);
 
     ingredientsArr.forEach(ingredient => {
+        const ingredientWrapper = document.createElement('div');
         const ingredientEl = document.createElement('input');
         const removeIngredientBtn = document.createElement('button');
 
@@ -300,10 +301,20 @@ const editRecipeForm = (recipeId) => {
         removeIngredientBtn.classList.add('btn');
         removeIngredientBtn.classList.add('btn-remove');
 
+        removeIngredientBtn.addEventListener('click', e => {
+            const recipeNodeParent = e.target.parentNode.parentNode;
+            const recipeNode = e.target.parentNode;
+            recipeNodeParent.removeChild(recipeNode);
+        })
+
         ingredientEl.classList.add('input');
         ingredientEl.value = ingredient;
-        recipeDiv.append(ingredientEl);
-        recipeDiv.append(removeIngredientBtn    );
+
+        ingredientWrapper.classList.add('ingredient');
+        ingredientWrapper.append(ingredientEl);
+        ingredientWrapper.append(removeIngredientBtn);
+
+        recipeDiv.append(ingredientWrapper);
     })
     
     const btnOptions = document.createElement('div');
