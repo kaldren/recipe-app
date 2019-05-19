@@ -316,12 +316,18 @@ const editRecipeForm = (recipeId) => {
     
     btnAddIngredient.addEventListener('click', () => {
         const ingredient = document.createElement('input');
+        const removeIngredientBtn = document.createElement('button');
+
+        removeIngredientBtn.textContent = 'Remove'
+        removeIngredientBtn.classList.add('btn');
+        removeIngredientBtn.classList.add('btn-remove');
+
         ingredient.placeholder = 'Ingredient';
-        ingredient.classList.add('display-block');
         ingredient.classList.add('input');
         ingredient.classList.add('js-ingredient');
         
         recipeDiv.append(ingredient);
+        recipeDiv.append(removeIngredientBtn);
     });
     
     recipeEditBtn.textContent = 'Save';
