@@ -2,7 +2,7 @@ const uuidv4 = require('uuid/v4');
 
 const initRecipeForm = (container) => {
     // Default container is #main
-    const rootEl = document.querySelector(container ? container : '#main');
+    const rootEl = getRootContainer();
     rootEl.innerHTML = '';
 
     const recipeForm = document.createElement('div');
@@ -54,7 +54,7 @@ const initRecipeForm = (container) => {
 
         storage.push(recipe);
 
-        localStorage.setItem('recipes', JSON.stringify(storage));
+        addRecipe('recipes', storage);
 
         allInputFields.forEach((el) => {
             el.value = '';
@@ -78,11 +78,11 @@ const getAllRecipes = (storageName) => {
 }
 
 // By default show all recipes, else provide a recipeId to show individual recipe
-const loadAllRecipes = (container, recipeId) => {
+const loadAllRecipes = (recipeId) => {
     const recipes = getAllRecipes();
 
     // Default container is #main
-    const rootEl = document.querySelector(container ? container : '#main');
+    const rootEl = getRootContainer();
     rootEl.innerHTML = '';
 
     const recipesContainer = document.createElement('div');
@@ -98,9 +98,7 @@ const loadAllRecipes = (container, recipeId) => {
 
     // Individual recipe
     if (recipeId) {
-        const recipe = recipes.filter(el => {
-            return el.id === recipeId;
-        })
+        const recipe = getRecipeById(recipes, recipeId);
 
         const recipeDiv = document.createElement('div');
         const recipeName = document.createElement('p');
@@ -133,10 +131,9 @@ const loadAllRecipes = (container, recipeId) => {
 
             if (recipeId) {
                 let recipesList = getAllRecipes();
-                recipesList = recipesList.filter(recipe => {
-                    return recipe.id !== recipeId;
-                })
-                localStorage.setItem('recipes', JSON.stringify(recipesList));
+                recipesList = removeRecipeById(recipesList, recipeId);
+                addRecipe('recipes', recipesList);
+
                 loadAllRecipes();
                 loadAllRecipeNames();
             }
@@ -188,10 +185,9 @@ const loadAllRecipes = (container, recipeId) => {
 
                 if (recipeId) {
                     let recipesList = getAllRecipes();
-                    recipesList = recipesList.filter(recipe => {
-                        return recipe.id !== recipeId;
-                    })
-                    localStorage.setItem('recipes', JSON.stringify(recipesList));
+                    recipesList = removeRecipeById(recipesList, recipeId);
+
+                    addRecipe('recipes', recipesList);
                     loadAllRecipes();
                     loadAllRecipeNames();
                 }
@@ -201,7 +197,6 @@ const loadAllRecipes = (container, recipeId) => {
             recipeEditBtn.classList.add('btn');
             recipeEditBtn.classList.add('btn-edit');
             recipeEditBtn.dataset.id = `${recipe.id}`;
-
 
             btnOptions.classList.add('options');
             btnOptions.append(recipeEditBtn);
@@ -217,8 +212,7 @@ const loadAllRecipes = (container, recipeId) => {
 const loadAllRecipeNames = (container) => {
     const recipes = getAllRecipes();
 
-    // Default container is #sidebar
-    const rootEl = document.querySelector(container ? container : '#sidebar');
+    const rootEl = getRootContainer('#sidebar');
     rootEl.innerHTML = '';
 
     const recipesContainer = document.createElement('div');
@@ -236,7 +230,7 @@ const loadAllRecipeNames = (container) => {
 
         recipeName.addEventListener('click', e => {
             const recipeId = e.target.dataset.id;
-            loadAllRecipes(undefined,recipeId);
+            loadAllRecipes(recipeId);
         });
 
         recipeDiv.append(recipeName);
@@ -245,6 +239,26 @@ const loadAllRecipeNames = (container) => {
     })
 
     rootEl.append(recipesContainer);
+}
+
+const getRootContainer = (container) => {
+    return document.querySelector(container ? container : '#main');
+}
+
+const removeRecipeById = (recipes, id) => {
+    return recipes.filter(recipe => {
+        return recipe.id !== id;
+    })
+}
+
+const getRecipeById = (recipes, id) => {
+    return recipes.filter(el => {
+        return el.id === id;
+    })
+}
+
+const addRecipe = (storageName, recipes) => {
+    localStorage.setItem(storageName, JSON.stringify(recipes));
 }
 
 export {initRecipeForm, loadAllRecipes, loadAllRecipeNames}
